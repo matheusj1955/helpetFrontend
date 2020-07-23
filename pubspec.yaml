@@ -24,9 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_staggered_animations: "^0.1.2"
+  http: ^0.12.0+2
   image_picker: any
   bloc_pattern: 2.1.0
   rxdart: 0.21.0
+
 
 
   # The following adds the Cupertino Icons font to your application.

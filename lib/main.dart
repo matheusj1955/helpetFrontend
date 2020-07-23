@@ -7,7 +7,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:testando/posts.dart';
 import 'login.dart';
 
+
 void main() {
+  ServicePostagem servicePostagem = ServicePostagem();
+  ServicePostagem.getPostagens();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MyApp(),

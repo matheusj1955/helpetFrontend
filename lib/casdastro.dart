@@ -6,6 +6,7 @@ class Cadastro extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
+TextFormField _nomeCadastro;
 
 class _LoginState extends State<Cadastro> {
   @override
@@ -24,7 +25,7 @@ class _LoginState extends State<Cadastro> {
         color: Colors.white,
         child: ListView(
           children: <Widget>[
-            TextFormField(
+            _nomeCadastro = TextFormField(
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 labelText: "Nome",
