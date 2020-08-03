@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:testando/posts.dart';
+import 'api/dominio/postagens/service_postagem.dart';
 import 'login.dart';
 
 
-void main() {
+Future<void> main() async {
   ServicePostagem servicePostagem = ServicePostagem();
-  ServicePostagem.getPostagens();
+  var postagens = await servicePostagem.getPostagens();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MyApp(),

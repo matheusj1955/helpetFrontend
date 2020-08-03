@@ -8,6 +8,7 @@ class Postagem {
   String descricao;
 //  String post_imagem;
 
+
   //alt+insert
   Postagem(this.id_postagem, this.usuario, this.titulo, this.descricao);
 
@@ -19,6 +20,4 @@ class Postagem {
       json['descricao']
     );
   }
-
-
 }

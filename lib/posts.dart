@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:testando/api/dominio/postagens/postagem.dart';
+import 'package:testando/api/dominio/postagens/service_postagem.dart';
 import 'package:testando/postar.dart';
 import 'login.dart';
 
@@ -14,126 +16,148 @@ class _homeState extends State<Posts> {
   String selectTipoModal = null;
   String selectEspecieModal = null;
 
+  ServicePostagem servicePostagem = ServicePostagem();
+
   @override
   Widget build(BuildContext context) {
     loadTipo();
     loadEspecie();
     return Scaffold(
-        appBar: AppBar(
-            title: Text("Postagens"),
-            centerTitle: true, // this is all you need
-            backgroundColor: Color(0xffa56336)),
-        body: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 120,
-              color: Color(0xffa56336),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    height: 40,
-                    width: 87,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.topRight,
-                          stops: [0.3, 1],
-                          colors: [
-                            Colors.white,
-                            Colors.amber,
-                          ],
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                    child: FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => Postar()));
-                      },
-                      child: Text("Post",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          )),
+      appBar: AppBar(
+          title: Text("Postagens"),
+          centerTitle: true, // this is all you need
+          backgroundColor: Color(0xffa56336)),
+      body: Column(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 120,
+            color: Color(0xffa56336),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  height: 40,
+                  width: 87,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                        stops: [0.3, 1],
+                        colors: [
+                          Colors.white,
+                          Colors.amber,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Postar()));
+                    },
+                    child: Text("Post",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        )),
+                  ),
+                ),
+                IconButton(
+                  icon: Image.asset('images/pesquisa.png'),
+                  iconSize: 100,
+                  onPressed: () => _modalPesquisar(),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      height: 40,
+                      width: 87,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.topRight,
+                            stops: [0.3, 1],
+                            colors: [
+                              Colors.white,
+                              Colors.white,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => Login()));
+                        },
+                        child: Text("Login",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            )),
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    icon: Image.asset('images/pesquisa.png'),
-                    iconSize: 100,
-                    onPressed: () => _modalPesquisar(),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Container(
-                        height: 40,
-                        width: 87,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              stops: [0.3, 1],
-                              colors: [
-                                Colors.white,
-                                Colors.white,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Login()));
-                          },
-                          child: Text("Login",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              )),
-                        ),
+                    Container(
+                      height: 40,
+                      width: 87,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.topRight,
+                            stops: [0.3, 1],
+                            colors: [
+                              Colors.white,
+                              Colors.amber,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => Login()));
+                        },
+                        child: Text("Menu",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            )),
                       ),
-                      Container(
-                        height: 40,
-                        width: 87,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              stops: [0.3, 1],
-                              colors: [
-                                Colors.white,
-                                Colors.amber,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Login()));
-                          },
-                          child: Text("Menu",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              )),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ));
+          ),
+          Expanded(
+            flex: 12,
+            child: Container(
+              child: FutureBuilder(future: servicePostagem.getPostagens(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                        Postagem postagem = snapshot.data[index];
+                          return Text(postagem.id_postagem.toString());
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void _modalPesquisar() {
