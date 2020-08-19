@@ -180,6 +180,7 @@ class _PostarState extends State<Postar> {
               height: 10,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Container(
                   height: 40,

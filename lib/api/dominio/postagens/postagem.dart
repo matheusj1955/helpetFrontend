@@ -1,5 +1,3 @@
-import '../usuario/usuario.dart';
-
 class Postagem {
 
   int id_postagem;

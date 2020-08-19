@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:testando/api/dominio/postagens/postagem.dart';
 import 'package:testando/api/dominio/postagens/service_postagem.dart';
 import 'package:testando/postar.dart';
+import 'api/dominio/usuario/usuario.dart';
+import 'api/dominio/usuario/usuario_service.dart';
 import 'login.dart';
 
 class Posts extends StatefulWidget {
@@ -17,6 +19,7 @@ class _homeState extends State<Posts> {
   String selectEspecieModal = null;
 
   ServicePostagem servicePostagem = ServicePostagem();
+  ServiceUsuario serviceUsuario = ServiceUsuario();
 
   @override
   Widget build(BuildContext context) {
@@ -137,28 +140,22 @@ class _homeState extends State<Posts> {
           Expanded(
             flex: 12,
             child: Container(
-              child: FutureBuilder(future: servicePostagem.getPostagens(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                        Postagem postagem = snapshot.data[index];
-                          return Text(postagem.id_postagem.toString());
-                        },
-                      );
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+                child: FutureBuilder(
+                    future: Future.wait([servicePostagem.getPostagens(),serviceUsuario.getUsuarios()]),
+                    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                        snapshot.data[0]; //postagem
+                        snapshot.data[1]; //usuario
+                      if (snapshot.hasData) {
+                                return Text(snapshot.data[0]);
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            }
+                        ),
+    ),),)],)
+                      }
 
   void _modalPesquisar() {
     showModalBottomSheet(

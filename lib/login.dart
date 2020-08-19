@@ -79,6 +79,7 @@ class _LoginState extends State<Login> {
               height: 20,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Container(
                   height: 40,
