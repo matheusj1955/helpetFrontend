@@ -141,21 +141,28 @@ class _homeState extends State<Posts> {
             flex: 12,
             child: Container(
                 child: FutureBuilder(
-                    future: Future.wait([servicePostagem.getPostagens(),serviceUsuario.getUsuarios()]),
-                    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                        snapshot.data[0]; //postagem
-                        snapshot.data[1]; //usuario
-                      if (snapshot.hasData) {
-                                return Text(snapshot.data[0]);
-                              } else {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
+                    future: serviceUsuario.getUsuarios(),
+                    builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Center(
+                        child: Text(
+                          snapshot.data,
+                            style: TextStyle(fontSize: 20.0),
+                                  ),
+                               );
+                           } else {
+                           return Center(
+                            child: CircularProgressIndicator(),
+                            );
                               }
                             }
                         ),
-    ),),)],)
-                      }
+                       ),
+          ),
+        ],
+      ),
+    );
+  }
 
   void _modalPesquisar() {
     showModalBottomSheet(

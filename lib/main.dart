@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:testando/api/dominio/usuario/usuario_service.dart';
 import 'package:testando/posts.dart';
 import 'api/dominio/postagens/service_postagem.dart';
 import 'login.dart';
@@ -12,6 +13,10 @@ import 'login.dart';
 Future<void> main() async {
   ServicePostagem servicePostagem = ServicePostagem();
   var postagens = await servicePostagem.getPostagens();
+
+  ServiceUsuario serviceUsuario = ServiceUsuario();
+  var usuarios = await serviceUsuario.getUsuarios();
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MyApp(),
@@ -56,9 +61,9 @@ Future<void> main() async {
    }
  }
 
-
+//
 //void _api(){
-//  Widget MainHomeWidget(BuildContext context, Future<List<posts>> listEvents) {
+//  Widget MainHomeWidget(BuildContext context, Future<List<ServicePostagem>> listEvents) {
 //    return FutureBuilder(
 //      future: listEvents,
 //      builder: (context, projectSnap) {
