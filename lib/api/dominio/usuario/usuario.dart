@@ -14,4 +14,10 @@ class Usuario{
         json['email']
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    "nome": nome,
+    "telefone": tel,
+    "email": email
+  };
 }

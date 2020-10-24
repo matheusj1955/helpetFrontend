@@ -144,15 +144,17 @@ class _homeState extends State<Posts> {
                     future: serviceUsuario.getUsuarios(),
                     builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Center(
-                        child: Text(
-                          snapshot.data,
-                            style: TextStyle(fontSize: 20.0),
-                                  ),
-                               );
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(snapshot.data[index].nome),
+                          );
+                        },
+                      );
                            } else {
-                           return Center(
-                            child: CircularProgressIndicator(),
+                              return Container(
+                                child: Text("Carregando..."),
                             );
                               }
                             }

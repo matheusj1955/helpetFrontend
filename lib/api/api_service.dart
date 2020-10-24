@@ -10,7 +10,7 @@ import 'api_error_check.dart';
 
 class ApiService {
 
-  static const _apiPath = "http://192.168.100.30:3000/"; //192.168.100.5 192.168.100.30 10.86.100.62:3000
+  static const _apiPath = "http://192.168.100.35:3000/"; //192.168.100.5 192.168.100.30 10.86.100.62:3000
 
   dynamic get(String url, [String token = "no_token"]) async {
     var header;

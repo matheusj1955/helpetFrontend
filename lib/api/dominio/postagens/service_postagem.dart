@@ -15,4 +15,5 @@ class ServicePostagem extends ApiService {
 //    log('data: ${parse}');
     return result;
   }
+
 }
