@@ -15,9 +15,11 @@ class Usuario{
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "nome": nome,
-    "telefone": tel,
-    "email": email
-  };
+  Map<String, dynamic> toMap() {
+    return {
+      "nome": nome,
+      "tel": tel,
+      "email": email
+    };
+  }
 }

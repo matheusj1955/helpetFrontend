@@ -2,13 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:testando/login.dart';
 import 'package:testando/posts.dart';
 
+import 'api/dominio/usuario/usuario.dart';
+import 'api/dominio/usuario/usuario_service.dart';
+
 class Cadastro extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
-TextFormField _nomeCadastro;
+//TextFormField _nomeCadastro;
 
 class _LoginState extends State<Cadastro> {
+
+  ServiceUsuario serviceUsuario = ServiceUsuario();
+
+  final nomeField = TextEditingController();
+  final emailField = TextEditingController();
+  final telefoneField = TextEditingController();
+  final senhaField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +36,9 @@ class _LoginState extends State<Cadastro> {
         color: Colors.white,
         child: ListView(
           children: <Widget>[
-            _nomeCadastro = TextFormField(
+//            _nomeCadastro =
+            TextFormField(
+              controller: nomeField,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 labelText: "Nome",
@@ -37,6 +50,7 @@ class _LoginState extends State<Cadastro> {
               style: TextStyle(fontSize: 20),
             ),
             TextFormField(
+              controller: telefoneField,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 labelText: "Telefone",
@@ -51,6 +65,7 @@ class _LoginState extends State<Cadastro> {
               height: 10,
             ),
             TextFormField(
+              controller: emailField,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: "E-mail",
@@ -97,10 +112,8 @@ class _LoginState extends State<Cadastro> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Posts()));
+                      Usuario usuario = Usuario(null, nomeField.text, telefoneField.text, emailField.text);
+                      serviceUsuario.PostUsuario(usuario);
                     },
                     child: Text(
                       "Cadastrar",
@@ -133,7 +146,7 @@ class _LoginState extends State<Cadastro> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => Login()));
+                              builder: (BuildContext context) => Posts()));
                     },
                     child: Text("Cancelar",
                         style: TextStyle(

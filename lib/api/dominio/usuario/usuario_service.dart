@@ -16,11 +16,12 @@ class ServiceUsuario extends ApiService {
     return resultGet;
   }
 
-  Future<Usuario> PostUsuario(String nome, String tel, String email) async {
-    var parse = await post("http://192.168.100.35:3000/usuarios", {
-      "nome": nome,
-      "tel": tel,
-      "email": email
-    });
+  Future<Usuario> PostUsuario(Usuario usuario) async {
+    //enviar m Map como segundo parametro
+    //esse map contem os dados que vai ser enviado no post
+    var parse = await post('usuarios', usuario.toMap());
+        log('data: ${parse}');
+
+    return usuario;
   }
 }
