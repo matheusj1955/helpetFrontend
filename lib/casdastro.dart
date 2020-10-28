@@ -172,7 +172,6 @@ class _LoginState extends State<Cadastro> {
             ],
           ),
         )
-
       ),
     );
   }
@@ -195,8 +194,8 @@ String _validarCelular(String value) {
   RegExp regExp = new RegExp(patttern);
   if (value.length == 0) {
     return "Informe o celular";
-  } else if(value.length != 10){
-    return "O celular deve ter 10 dígitos";
+  } else if(value.length != 11){
+    return "O celular deve ter 11 dígitos";
   }else if (!regExp.hasMatch(value)) {
     return "O número do celular so deve conter dígitos";
   }
