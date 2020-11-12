@@ -31,5 +31,4 @@ class ServiceUsuario extends ApiService {
     var parse = await post('usuarios/login', usuario.toMap_login());
 //    log('data: ${parse}');
     return usuario;
-  }
-}
+  }}
