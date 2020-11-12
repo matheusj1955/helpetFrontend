@@ -20,15 +20,16 @@ class ServiceUsuario extends ApiService {
     //enviar m Map como segundo parametro
     //esse map contem os dados que vai ser enviado no post
     var parse = await post('usuarios', usuario.toMap());
-//    log('data: ${parse}');
+    log('data: ${parse}');
 
     return usuario;
   }
 
-  Future<Usuario> postVerificaLogin(Usuario usuario) async {
-    //enviar m Map como segundo parametro
-    //esse map contem os dados que vai ser enviado no post
-    var parse = await post('usuarios/login', usuario.toMap_login());
-//    log('data: ${parse}');
-    return usuario;
-  }}
+//  Future<Usuario> postVerificaLogin(Usuario usuario) async {
+//    //enviar m Map como segundo parametro
+//    //esse map contem os dados que vai ser enviado no post
+//    var parse = await post('usuarios/login', usuario.toMap_login());
+////    log('data: ${parse}');
+//    return usuario;
+//  }
+}

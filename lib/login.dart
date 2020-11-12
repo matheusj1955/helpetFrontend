@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:testando/api/dominio/login/loginUsuario.dart';
 import 'package:testando/casdastro.dart';
 import 'package:testando/posts.dart';
 import 'package:testando/recuperarSenha.dart';
 
-import 'api/dominio/usuario/usuario.dart';
-import 'api/dominio/usuario/usuario_service.dart';
+import 'api/dominio/login/service_login.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    ServiceUsuario serviceUsuario = ServiceUsuario();
+    ServiceLogin serviceLogin = ServiceLogin();
     final emailField = TextEditingController();
     final senhaField = TextEditingController();
 
@@ -106,8 +107,11 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () {
-                      Usuario usuarioLogin = Usuario.verificaLogin(emailField.text,senhaField.text);
-                      serviceUsuario.postVerificaLogin(usuarioLogin);
+                      LoginUsuario loginUsuario = LoginUsuario(emailField.text,senhaField.text);
+                      serviceLogin.postLogin(loginUsuario);
+
+//                      Usuario usuarioLogin = Usuario.verificaLogin(emailField.text,senhaField.text);
+//                      serviceUsuario.postVerificaLogin(usuarioLogin);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
