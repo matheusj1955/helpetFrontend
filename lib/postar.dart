@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:testando/api/dominio/postagens/postagem.dart';
+import 'package:testando/api/dominio/postagens/service_postagem.dart';
 import 'package:testando/posts.dart';
 
 class Postar extends StatefulWidget {
@@ -7,42 +12,27 @@ class Postar extends StatefulWidget {
 }
 
 class _PostarState extends State<Postar> {
+
+  ServicePostagem servicePostagem = ServicePostagem();
+
+//  final donoField = TextEditingController();
+  final usuarioField = TextEditingController();
+  final telefoneField = TextEditingController();
+  final petField = TextEditingController();
+  final tituloField = TextEditingController();
+  final msgField = TextEditingController();
+//  final imgField = ImagePicker();
+
+
   List<DropdownMenuItem<String>> listTipoOcorrencia = [];
   List<DropdownMenuItem<String>> listEspecie = [];
   String selectTipo = null;
   String selectEspecie = null;
 
-  void loadTipo() {
-    listTipoOcorrencia = [];
-    listTipoOcorrencia.add(DropdownMenuItem(
-      child: Text('Animal desaparecido'),
-      value: "desaparecido",
-    ));
-    listTipoOcorrencia.add(new DropdownMenuItem(
-      child: Text('Adoção'),
-      value: "Adoção",
-    ));
-    listTipoOcorrencia.add(new DropdownMenuItem(
-      child: Text('perdido'),
-      value: "perdido",
-    ));
-  }
+  File imagemGaleria;
+  File imagemTemporaria;
+  File imagemCamera;
 
-  void loadEspecie() {
-    listEspecie = [];
-    listEspecie.add(DropdownMenuItem(
-      child: Text('Cachorro'),
-      value: "Cachorro",
-    ));
-    listEspecie.add(new DropdownMenuItem(
-      child: Text('Gato'),
-      value: "Gato",
-    ));
-    listEspecie.add(new DropdownMenuItem(
-      child: Text('Peixe'),
-      value: "Peixe",
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,36 +52,59 @@ class _PostarState extends State<Postar> {
         color: Colors.white,
         child: ListView(
           children: <Widget>[
-            Row(
+           Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 IconButton(
-                  icon: Image.asset('images/teste.png'),
+                  icon: Icon(Icons.camera_alt),
                   iconSize: 100,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Posts()));
+                    pegarImagemCamera();
+//                    Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                            builder: (BuildContext context) => Posts()));
                   },
                 ),
                 IconButton(
-                  icon: Image.asset('images/teste.png'),
+                  icon: Icon(Icons.image),
                   iconSize: 100,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Posts()));
+                    pegarImagemGaleria();
+//                    Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                            builder: (BuildContext context) => Posts()));
                   },
                 ),
               ],
             ),
 
+            Row(
+              children: [
+                Container(
+                  height: 20,
+                  width: 20,
+                  child: imagemCamera != null ?
+                  Image.file(imagemCamera) : Center(
+                    child: Text(" "),
+                  )
+                ),
+                Container(
+                    height: 20,
+                    width: 20,
+                    child: imagemGaleria != null ?
+                    Image.file(imagemGaleria) : Center(
+                      child: Text(" "),
+                    )
+                ),
+              ],
+            ),
             TextFormField(
+              controller: usuarioField,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                labelText: "Nome",
+                labelText: "Usuario",
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -100,9 +113,22 @@ class _PostarState extends State<Postar> {
               style: TextStyle(fontSize: 20),
             ),
             TextFormField(
+              controller: petField,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                labelText: "Nome do Pet",
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+              style: TextStyle(fontSize: 20),
+            ),
+            TextFormField(
+              controller: telefoneField,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
-                labelText: "Telefone",
+                labelText: "Telefone para contato",
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -111,17 +137,7 @@ class _PostarState extends State<Postar> {
               style: TextStyle(fontSize: 20),
             ),
             TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: "Nome do animal",
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
-            TextFormField(
+              controller: tituloField,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 labelText: "Título",
@@ -169,6 +185,7 @@ class _PostarState extends State<Postar> {
             ),
             new Form(
               child: new TextFormField(
+                controller: msgField,
                 maxLines: 3,
                 decoration: InputDecoration(
                   labelText: "Descrição",
@@ -197,7 +214,10 @@ class _PostarState extends State<Postar> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
+
                     onPressed: () {
+                      Postagem postagem = Postagem(null, tituloField.text,msgField.text); // imagemCamera ou ,imgField.getImage(source: ImageSource.camera)
+                      servicePostagem.PostPostagem(postagem);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -251,4 +271,52 @@ class _PostarState extends State<Postar> {
       ),
     );
   }
+
+  void pegarImagemGaleria() async {
+    imagemTemporaria = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imagemGaleria = imagemTemporaria;
+    });
+  }
+
+  void pegarImagemCamera() async {
+    imagemTemporaria = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      imagemCamera = imagemTemporaria;
+    });
+  }
+
+  void loadTipo() {
+    listTipoOcorrencia = [];
+    listTipoOcorrencia.add(DropdownMenuItem(
+      child: Text('Animal desaparecido'),
+      value: "desaparecido",
+    ));
+    listTipoOcorrencia.add(new DropdownMenuItem(
+      child: Text('Adoção'),
+      value: "Adoção",
+    ));
+    listTipoOcorrencia.add(new DropdownMenuItem(
+      child: Text('perdido'),
+      value: "perdido",
+    ));
+  }
+
+  void loadEspecie() {
+    listEspecie = [];
+    listEspecie.add(DropdownMenuItem(
+      child: Text('Cachorro'),
+      value: "Cachorro",
+    ));
+    listEspecie.add(new DropdownMenuItem(
+      child: Text('Gato'),
+      value: "Gato",
+    ));
+    listEspecie.add(new DropdownMenuItem(
+      child: Text('Peixe'),
+      value: "Peixe",
+    ));
+  }
 }
+
+

@@ -4,6 +4,9 @@ import 'package:testando/casdastro.dart';
 import 'package:testando/posts.dart';
 import 'package:testando/recuperarSenha.dart';
 
+import 'api/dominio/usuario/usuario.dart';
+import 'api/dominio/usuario/usuario_service.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -12,6 +15,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    ServiceUsuario serviceUsuario = ServiceUsuario();
+    final emailField = TextEditingController();
+    final senhaField = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
           title: Text("Login"),
@@ -36,6 +43,7 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             TextFormField(
+              controller: emailField,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: "E-mail",
@@ -50,6 +58,7 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             TextFormField(
+              controller: senhaField,
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: InputDecoration(
@@ -97,6 +106,8 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () {
+                      Usuario usuarioLogin = Usuario.verificaLogin(emailField.text,senhaField.text);
+                      serviceUsuario.postVerificaLogin(usuarioLogin);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -86,6 +86,8 @@ class _LoginState extends State<Cadastro> {
                 height: 10,
               ),
               TextFormField(
+//                validator: _validarSenha,
+                controller: senhaField,
                 keyboardType: TextInputType.text,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -119,7 +121,7 @@ class _LoginState extends State<Cadastro> {
                     child: FlatButton(
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          Usuario usuario = Usuario(null, nomeField.text, telefoneField.text, emailField.text);
+                          Usuario usuario = Usuario(null, nomeField.text, telefoneField.text, emailField.text,senhaField.text);
                           serviceUsuario.PostUsuario(usuario);
                           Navigator.push(
                               context,
@@ -183,7 +185,10 @@ String _validarNome(String value) {
   RegExp regExp = new RegExp(patttern);
   if (value.length == 0) {
     return "Informe o nome";
-  } else if (!regExp.hasMatch(value)) {
+  } else if(value.length < 3 || value.length > 30) {
+    return "O nome deve conter de 3 a 30 caracteres";
+  }
+  else if (!regExp.hasMatch(value)) {
     return "O nome deve conter caracteres de a-z ou A-Z";
   }
   return null;
@@ -215,3 +220,5 @@ String _validarEmail(String value) {
     return null;
   }
 }
+
+//_validarSenha

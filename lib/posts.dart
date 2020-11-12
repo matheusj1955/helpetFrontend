@@ -76,34 +76,34 @@ class _homeState extends State<Posts> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Container(
-                      height: 40,
-                      width: 87,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.topRight,
-                            stops: [0.3, 1],
-                            colors: [
-                              Colors.white,
-                              Colors.white,
-                            ],
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => Login()));
-                        },
-                        child: Text("Login",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            )),
-                      ),
-                    ),
+//                    Container(
+//                      height: 40,
+//                      width: 87,
+//                      decoration: BoxDecoration(
+//                          gradient: LinearGradient(
+//                            begin: Alignment.topLeft,
+//                            end: Alignment.topRight,
+//                            stops: [0.3, 1],
+//                            colors: [
+//                              Colors.white,
+//                              Colors.white,
+//                            ],
+//                          ),
+//                          borderRadius: BorderRadius.all(Radius.circular(5))),
+//                      child: FlatButton(
+//                        onPressed: () {
+//                          Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (BuildContext context) => Login()));
+//                        },
+//                        child: Text("Login",
+//                            style: TextStyle(
+//                              color: Colors.black,
+//                              fontSize: 18,
+//                            )),
+//                      ),
+//                    ),
                     Container(
                       height: 40,
                       width: 87,
