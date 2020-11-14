@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testando/api/dominio/login/loginUsuario.dart';
@@ -106,17 +108,19 @@ class _LoginState extends State<Login> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
-                    onPressed: () {
+                    onPressed: () async {
                       LoginUsuario loginUsuario = LoginUsuario(emailField.text,senhaField.text);
-                      serviceLogin.postLogin(loginUsuario);
-
-//                      Usuario usuarioLogin = Usuario.verificaLogin(emailField.text,senhaField.text);
-//                      serviceUsuario.postVerificaLogin(usuarioLogin);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Posts()));
-                    },
+                      var login = await serviceLogin.postLogin(loginUsuario);
+                        if(login == true){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Posts()));
+                        }
+                        else {
+                            log("Erro ao logar");
+                          }
+                        },
                     child: Text(
                       "Entrar",
                       style: TextStyle(

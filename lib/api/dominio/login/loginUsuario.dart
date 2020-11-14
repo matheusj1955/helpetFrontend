@@ -17,4 +17,9 @@ class LoginUsuario{
       "senha": senha
     };
   }
+
+  String getToken(Map<String, dynamic> json){
+    return json["token"];
+  }
+
 }
