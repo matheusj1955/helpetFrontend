@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -100,42 +101,42 @@ class _PostarState extends State<Postar> {
                 ),
               ],
             ),
-            TextFormField(
-              controller: usuarioField,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: "Usuario",
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
-            TextFormField(
-              controller: petField,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: "Nome do Pet",
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
-            TextFormField(
-              controller: telefoneField,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: "Telefone para contato",
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
+//            TextFormField(
+//              controller: usuarioField,
+//              keyboardType: TextInputType.text,
+//              decoration: InputDecoration(
+//                labelText: "Usuario",
+//                labelStyle: TextStyle(
+//                  color: Colors.black,
+//                  fontSize: 20,
+//                ),
+//              ),
+//              style: TextStyle(fontSize: 20),
+//            ),
+//            TextFormField(
+//              controller: petField,
+//              keyboardType: TextInputType.text,
+//              decoration: InputDecoration(
+//                labelText: "Nome do Pet",
+//                labelStyle: TextStyle(
+//                  color: Colors.black,
+//                  fontSize: 20,
+//                ),
+//              ),
+//              style: TextStyle(fontSize: 20),
+//            ),
+//            TextFormField(
+//              controller: telefoneField,
+//              keyboardType: TextInputType.phone,
+//              decoration: InputDecoration(
+//                labelText: "Telefone para contato",
+//                labelStyle: TextStyle(
+//                  color: Colors.black,
+//                  fontSize: 20,
+//                ),
+//              ),
+//              style: TextStyle(fontSize: 20),
+//            ),
             TextFormField(
               controller: tituloField,
               keyboardType: TextInputType.text,
@@ -214,10 +215,10 @@ class _PostarState extends State<Postar> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
-
                     onPressed: () {
                       Postagem postagem = Postagem(null, tituloField.text,msgField.text); // imagemCamera ou ,imgField.getImage(source: ImageSource.camera)
-                      servicePostagem.PostPostagem(postagem);
+//                      postagem.imagem = imagemGaleria;
+                      servicePostagem.PostPostagem(postagem, imagemGaleria);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

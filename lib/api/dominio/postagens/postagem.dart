@@ -4,10 +4,9 @@ class Postagem {
 
   int id_postagem;
   int id_usuario;
-  int telefone;
   String titulo;
   String descricao;
-//  File post_imagem;
+  File imagem;
 
 
   //alt+insert

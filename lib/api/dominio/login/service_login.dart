@@ -29,7 +29,7 @@ class ServiceLogin extends ApiService {
     await prefs.setString("chaveToken", token);
   }
 
-  Future<String> getToken() async{
+  static Future<String> getToken() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.getString("chaveToken");
   }

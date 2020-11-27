@@ -5,6 +5,7 @@ import 'package:testando/api/dominio/postagens/service_postagem.dart';
 import 'package:testando/postar.dart';
 import 'api/dominio/usuario/usuario.dart';
 import 'api/dominio/usuario/usuario_service.dart';
+import 'config.dart';
 import 'login.dart';
 
 class Posts extends StatefulWidget {
@@ -42,7 +43,7 @@ class _homeState extends State<Posts> {
               children: <Widget>[
                 Container(
                   height: 40,
-                  width: 87,
+                  width: 90,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
@@ -59,9 +60,9 @@ class _homeState extends State<Posts> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => Postar()));
+                              builder: (BuildContext context) => Config()));
                     },
-                    child: Text("Post",
+                    child: Text("Config",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -76,37 +77,37 @@ class _homeState extends State<Posts> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-//                    Container(
-//                      height: 40,
-//                      width: 87,
-//                      decoration: BoxDecoration(
-//                          gradient: LinearGradient(
-//                            begin: Alignment.topLeft,
-//                            end: Alignment.topRight,
-//                            stops: [0.3, 1],
-//                            colors: [
-//                              Colors.white,
-//                              Colors.white,
-//                            ],
-//                          ),
-//                          borderRadius: BorderRadius.all(Radius.circular(5))),
-//                      child: FlatButton(
-//                        onPressed: () {
-//                          Navigator.push(
-//                              context,
-//                              MaterialPageRoute(
-//                                  builder: (BuildContext context) => Login()));
-//                        },
-//                        child: Text("Login",
-//                            style: TextStyle(
-//                              color: Colors.black,
-//                              fontSize: 18,
-//                            )),
-//                      ),
-//                    ),
                     Container(
                       height: 40,
                       width: 87,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.topRight,
+                            stops: [0.3, 1],
+                            colors: [
+                              Colors.white,
+                              Colors.white,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => Login()));
+                        },
+                        child: Text("logar",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            )),
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      width: 95,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
@@ -123,9 +124,9 @@ class _homeState extends State<Posts> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => Login()));
+                                  builder: (BuildContext context) => Postar()));
                         },
-                        child: Text("Menu",
+                        child: Text("Postar",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,

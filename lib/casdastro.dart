@@ -86,7 +86,7 @@ class _LoginState extends State<Cadastro> {
                 height: 10,
               ),
               TextFormField(
-//                validator: _validarSenha,
+                validator: _validarSenha,
                 controller: senhaField,
                 keyboardType: TextInputType.text,
                 obscureText: true,
@@ -103,6 +103,7 @@ class _LoginState extends State<Cadastro> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
                     height: 40,
@@ -126,7 +127,7 @@ class _LoginState extends State<Cadastro> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => Posts()));
+                                  builder: (BuildContext context) => Login()));
                         }
                       },
                       child: Text(
@@ -222,3 +223,11 @@ String _validarEmail(String value) {
 }
 
 //_validarSenha
+String _validarSenha(String value) {
+  if (value.length == 0) {
+    return "Informe uma senha";
+  } else if(value.length < 3 || value.length > 30) {
+    return "O nome deve conter de 3 a 10 caracteres";
+  }
+  return null;
+}

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:testando/posts.dart';
 
-class RecuperacaoSenha extends StatefulWidget {
+class Config extends StatefulWidget {
   @override
-  _RecuperacaoSenhaState createState() => _RecuperacaoSenhaState();
+  _ConfigState createState() => _ConfigState();
 }
 
-class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
+class _ConfigState extends State<Config> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Login"),
+            title: Text("Configuração"),
             centerTitle: true, // this is all you need
             backgroundColor: Color(0xffa56336)),
         body: Container(
@@ -23,35 +23,25 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
           color: Colors.white,
           child: ListView(
             children: <Widget>[
-              SizedBox(
-                  width: 150,
-                  height: 120,
-                  child: Image.asset(
-                    "images/teste.png",
-                  )),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: "Digite o e-mail",
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Column(
                 children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    iconSize: 100,
+                    onPressed: () {
+//                      pegarImagemCamera();
+//                    Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                            builder: (BuildContext context) => Posts()));
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
-                    height: 40,
-                    width: 135,
+                    height: 60,
+                    width: 200,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -71,7 +61,7 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
                                 builder: (BuildContext context) => Posts()));
                       },
                       child: Text(
-                        "Enviar",
+                        "Meus dados",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -80,11 +70,11 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    height: 30,
                   ),
                   Container(
-                    height: 40,
-                    width: 135,
+                    height: 60,
+                    width: 200,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -103,7 +93,7 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
                             MaterialPageRoute(
                                 builder: (BuildContext context) => Posts()));
                       },
-                      child: Text("Cancelar",
+                      child: Text("Minhas postagens",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,

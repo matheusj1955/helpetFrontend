@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:testando/api/dominio/login/service_login.dart';
 import 'package:testando/api/dominio/postagens/postagem.dart';
+import 'package:testando/login.dart';
 
 import '../../api_service.dart';
 import 'dart:async';
@@ -16,11 +21,13 @@ class ServicePostagem extends ApiService {
     return resultGet;
   }
 
-  Future<Postagem> PostPostagem(Postagem postagem) async {
+  Future<Postagem> PostPostagem(Postagem postagem, File imagem) async {
     //enviar m Map como segundo parametro
     //esse map contem os dados que vai ser enviado no post
-    var parse = await post('postagens', postagem.toMap());
-    log('data: ${parse}');
+    var token = await ServiceLogin.getToken();
+    log('coisa: ${postagem.imagem}');
+    var parse = await postFile('postagens', postagem.titulo,postagem.descricao, imagem,token);
+//    log('data: ${parse}');
 
     return postagem;
   }

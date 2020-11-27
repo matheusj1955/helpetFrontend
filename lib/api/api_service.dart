@@ -38,8 +38,7 @@ class ApiService {
   }
 
 
-  //mangu falou q ususario outro droga - firebase
-  dynamic postFile(String url, File avatar, [String token = "no_token"]) async {
+  dynamic postFile(String url, String titulo, String descricao, File avatar, [String token = "no_token"]) async {
     var header = {"Authorization": "Bearer $token"};
     // open a bytestream
     var stream = new http.ByteStream(DelegatingStream.typed(avatar.openRead()));
@@ -54,11 +53,13 @@ class ApiService {
     request.headers.addAll(header);
 
     // multipart that takes file
-    var multipartFile = new http.MultipartFile('file', stream, length,
+    var multipartFile = new http.MultipartFile('postagem_imagem', stream, length,
       filename: basename(avatar.path));
 
     // add file to multipart
     request.files.add(multipartFile);
+    request.fields["titulo"] = titulo;
+    request.fields["descricao"] = descricao;
 
     // send
     var response = await request.send();
