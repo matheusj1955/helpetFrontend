@@ -216,9 +216,10 @@ class _PostarState extends State<Postar> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () {
-                      Postagem postagem = Postagem(null, tituloField.text,msgField.text); // imagemCamera ou ,imgField.getImage(source: ImageSource.camera)
-//                      postagem.imagem = imagemGaleria;
-                      servicePostagem.PostPostagem(postagem, imagemGaleria);
+                      Postagem postagem = Postagem(null, tituloField.text,msgField.text, null); // imagemCamera ou ,imgField.getImage(source: ImageSource.camera)
+                      postagem.imagem = imagemCamera;
+                      servicePostagem.PostPostagem(postagem);
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(

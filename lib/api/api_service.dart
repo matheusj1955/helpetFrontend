@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:mime_type/mime_type.dart';
 
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -44,7 +46,6 @@ class ApiService {
     var stream = new http.ByteStream(DelegatingStream.typed(avatar.openRead()));
     // get file length
     var length = await avatar.length();
-
     // string to uri
     var uri = Uri.parse(_apiPath + url);
 
@@ -53,8 +54,9 @@ class ApiService {
     request.headers.addAll(header);
 
     // multipart that takes file
+    String mimeType = mime(basename(avatar.path));
     var multipartFile = new http.MultipartFile('postagem_imagem', stream, length,
-      filename: basename(avatar.path));
+      filename: basename(avatar.path) , contentType: MediaType(mimeType.split('/')[0],mimeType.split('/')[1]));
 
     // add file to multipart
     request.files.add(multipartFile);

@@ -7,17 +7,17 @@ class Postagem {
   String titulo;
   String descricao;
   File imagem;
-
+  String postagem_imagem;
 
   //alt+insert
-  Postagem(this.id_postagem,this.titulo, this.descricao); //, this.post_imagem
+  Postagem(this.id_postagem,this.titulo, this.descricao, this.postagem_imagem); //, this.post_imagem
 
   factory Postagem.fromJson(Map<String, dynamic> json){
     return Postagem(
       json['id_postagem'],
       json['titulo'],
       json['descricao'],
-//      json['post_imagem'],
+      json['postagem_imagem'],
     );
   }
 
@@ -25,7 +25,7 @@ class Postagem {
     return {
       "titulo": titulo,
       "descricao": descricao,
-//      "postagem_imagem": post_imagem
+      "postagem_imagem": postagem_imagem
     };
   }
 }

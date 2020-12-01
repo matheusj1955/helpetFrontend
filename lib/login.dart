@@ -16,6 +16,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     ServiceLogin serviceLogin = ServiceLogin();
@@ -34,6 +36,8 @@ class _LoginState extends State<Login> {
           left: 40,
         ),
         color: Colors.white,
+          child: Form(
+          key: _formKey,
         child: ListView(
           children: <Widget>[
             SizedBox(
@@ -46,6 +50,7 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             TextFormField(
+              validator: _validarEmail,
               controller: emailField,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -61,6 +66,7 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             TextFormField(
+              validator: _validarSenha,
               controller: senhaField,
               keyboardType: TextInputType.text,
               obscureText: true,
@@ -109,6 +115,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () async {
+                      if (_formKey.currentState.validate()) {
                       LoginUsuario loginUsuario = LoginUsuario(emailField.text,senhaField.text);
                       var login = await serviceLogin.postLogin(loginUsuario);
                         if(login == true){
@@ -120,6 +127,7 @@ class _LoginState extends State<Login> {
                         else {
                             log("Erro ao logar");
                           }
+                        }
                         },
                     child: Text(
                       "Entrar",
@@ -185,7 +193,35 @@ class _LoginState extends State<Login> {
             )
           ],
         ),
+          ),
       ),
     );
   }
+}
+
+String _validarEmail(String value) {
+  String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@'
+      r'((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regExp = new RegExp(pattern);
+  if (value.length == 0) {
+    return "Informe o Email";
+  } else if(!regExp.hasMatch(value)){
+    return "Email inválido";
+  }
+//  else if(postagem.email == value){
+//    return "Email já existente";
+//  }
+  else {
+    return null;
+  }
+}
+
+//_validarSenha
+String _validarSenha(String value) {
+  if (value.length == 0) {
+    return "Informe uma senha";
+  } else if(value.length < 3 || value.length > 30) {
+    return "O nome deve conter de 3 a 10 caracteres";
+  }
+  return null;
 }

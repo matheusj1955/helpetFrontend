@@ -31,6 +31,9 @@ dependencies:
   bloc_pattern: 2.1.0
   rxdart: 0.21.0
   shared_preferences: any
+  mime_type: 0.3.2
+  http_parser: 3.1.4
+
 
 
 

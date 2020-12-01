@@ -142,15 +142,23 @@ class _homeState extends State<Posts> {
             flex: 12,
             child: Container(
                 child: FutureBuilder(
-                    future: serviceUsuario.getUsuarios(),
+                    future: servicePostagem.getPostagens(),
                     builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(snapshot.data[index].nome),
-                          );
+                          return Container(
+                              child: Column(
+                                children: [
+                                  Image.network("http://192.168.100.35:3000/" + snapshot.data[index].postagem_imagem),
+                                  ListTile(
+                                  title: Text(snapshot.data[index].titulo),
+                                  subtitle: Text(snapshot.data[index].descricao),
+                                ),],
+                              ),
+
+                              );
                         },
                       );
                            } else {
