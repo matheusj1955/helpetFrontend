@@ -18,6 +18,7 @@ class _homeState extends State<Posts> {
   List<DropdownMenuItem<String>> listEspecieModal = [];
   String selectTipoModal = null;
   String selectEspecieModal = null;
+  String recebeImagem = null;
 
   ServicePostagem servicePostagem = ServicePostagem();
   ServiceUsuario serviceUsuario = ServiceUsuario();
@@ -151,7 +152,7 @@ class _homeState extends State<Posts> {
                           return Container(
                               child: Column(
                                 children: [
-                                  Image.network("http://192.168.100.35:3000/" + snapshot.data[index].postagem_imagem),
+                                  Image.network("http://192.168.100.35:3000/uploads//" + snapshot.data[index].postagem_imagem),
                                   ListTile(
                                   title: Text(snapshot.data[index].titulo),
                                   subtitle: Text(snapshot.data[index].descricao),
