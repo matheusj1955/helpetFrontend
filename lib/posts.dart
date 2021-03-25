@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:testando/api/dominio/postagens/postagem.dart';
 import 'package:testando/api/dominio/postagens/service_postagem.dart';
 import 'package:testando/postar.dart';
+import 'package:testando/telapost.dart';
 import 'api/dominio/usuario/usuario.dart';
 import 'api/dominio/usuario/usuario_service.dart';
 import 'config.dart';
@@ -56,19 +57,18 @@ class _homeState extends State<Posts> {
                         ],
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Config()));
-                    },
-                    child: Text("Config",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        )),
-                  ),
+//                  child: FlatButton(
+//                    onPressed: enviaId/*() {
+//                      Navigator.push(
+//                          context,
+//                          MaterialPageRoute(
+//                              builder: (BuildContext context) => Config()));
+//                    }*/,
+                  child: Text("Config",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      )),
                 ),
                 IconButton(
                   icon: Image.asset('images/pesquisa.png'),
@@ -78,34 +78,34 @@ class _homeState extends State<Posts> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Container(
-                      height: 40,
-                      width: 87,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.topRight,
-                            stops: [0.3, 1],
-                            colors: [
-                              Colors.white,
-                              Colors.white,
-                            ],
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => Login()));
-                        },
-                        child: Text("logar",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            )),
-                      ),
-                    ),
+//                    Container(
+//                      height: 40,
+//                      width: 87,
+//                      decoration: BoxDecoration(
+//                          gradient: LinearGradient(
+//                            begin: Alignment.topLeft,
+//                            end: Alignment.topRight,
+//                            stops: [0.3, 1],
+//                            colors: [
+//                              Colors.white,
+//                              Colors.white,
+//                            ],
+//                          ),
+//                          borderRadius: BorderRadius.all(Radius.circular(5))),
+//                      child: FlatButton(
+//                        onPressed: () {
+//                          Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (BuildContext context) => Login()));
+//                        },
+//                        child: Text("logar",
+//                            style: TextStyle(
+//                              color: Colors.black,
+//                              fontSize: 18,
+//                            )),
+//                      ),
+//                    ),
                     Container(
                       height: 40,
                       width: 95,
@@ -142,34 +142,40 @@ class _homeState extends State<Posts> {
           Expanded(
             flex: 12,
             child: Container(
-                child: FutureBuilder(
-                    future: servicePostagem.getPostagens(),
-                    builder: (context, snapshot) {
+              child: FutureBuilder(
+                  future: servicePostagem.getPostagens(),
+                  builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return Container(
+                          return GestureDetector(
+                            onTap: () =>
+                                enviaId(snapshot.data[index].id_postagem),
+                            child: Container(
                               child: Column(
                                 children: [
-                                  Image.network("http://192.168.100.35:3000/uploads//" + snapshot.data[index].postagem_imagem),
                                   ListTile(
-                                  title: Text(snapshot.data[index].titulo),
-                                  subtitle: Text(snapshot.data[index].descricao),
-                                ),],
+                                    title: Text(snapshot.data[index].titulo),
+                                    subtitle:
+                                    Text(snapshot.data[index].descricao),
+                                  ),
+                                  Image.network(
+                                      "http://192.168.100.35:3000/uploads//" +
+                                          snapshot.data[index].postagem_imagem),
+                                ],
                               ),
-
-                              );
+                            ),
+                          );
                         },
                       );
-                           } else {
-                              return Container(
-                                child: Text("Carregando..."),
-                            );
-                              }
-                            }
-                        ),
-                       ),
+                    } else {
+                      return Container(
+                        child: Text("Carregando..."),
+                      );
+                    }
+                  }),
+            ),
           ),
         ],
       ),
@@ -292,8 +298,17 @@ class _homeState extends State<Posts> {
       value: "Gato",
     ));
     listEspecieModal.add(new DropdownMenuItem(
-      child: Text('Peixe'),
-      value: "Peixe",
+      child: Text('Outros'),
+      value: "Outros",
     ));
+  }
+
+  void enviaId(int idpost) {
+    setState(() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => TelaPost(idpost)));
+    });
   }
 }

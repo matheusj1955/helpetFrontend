@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testando/login.dart';
 import 'package:testando/posts.dart';
 
 class RecuperacaoSenha extends StatefulWidget {
@@ -68,7 +69,7 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Posts()));
+                                builder: (BuildContext context) => Login()));
                       },
                       child: Text(
                         "Enviar",
@@ -101,7 +102,7 @@ class _RecuperacaoSenhaState extends State<RecuperacaoSenha> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Posts()));
+                                builder: (BuildContext context) => Login()));
                       },
                       child: Text("Cancelar",
                           style: TextStyle(

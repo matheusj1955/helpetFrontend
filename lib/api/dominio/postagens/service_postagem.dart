@@ -21,6 +21,17 @@ class ServicePostagem extends ApiService {
     return resultGet;
   }
 
+  Future<Postagem> getUmaPostagem(id_post) async {
+    var parse = await get('postagens');
+
+    var resultGet = (parse['postagens/id_post'])
+        .map<Postagem>((json) => Postagem.fromJson(json))
+        .toList();
+    return resultGet;
+  }
+
+
+
   Future<Postagem> PostPostagem(Postagem postagem) async {
     //enviar m Map como segundo parametro
     //esse map contem os dados que vai ser enviado no post
@@ -28,7 +39,6 @@ class ServicePostagem extends ApiService {
     log('coisa: ${postagem.imagem}');
     var parse = await postFile('postagens', postagem.titulo,postagem.descricao, postagem.imagem,token);
 //    log('data: ${parse}');
-
     return postagem;
   }
 

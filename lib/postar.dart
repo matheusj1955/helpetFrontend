@@ -41,7 +41,7 @@ class _PostarState extends State<Postar> {
     loadEspecie();
     return Scaffold(
       appBar: AppBar(
-          title: Text("Postagem"),
+          title: Text("Postar"),
           centerTitle: true, // this is all you need
           backgroundColor: Color(0xffa56336)),
       body: Container(
@@ -315,8 +315,8 @@ class _PostarState extends State<Postar> {
       value: "Gato",
     ));
     listEspecie.add(new DropdownMenuItem(
-      child: Text('Peixe'),
-      value: "Peixe",
+      child: Text('Outros'),
+      value: "Outros",
     ));
   }
 }

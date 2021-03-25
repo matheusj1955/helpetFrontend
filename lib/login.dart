@@ -115,6 +115,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () async {
+
                       if (_formKey.currentState.validate()) {
                       LoginUsuario loginUsuario = LoginUsuario(emailField.text,senhaField.text);
                       var login = await serviceLogin.postLogin(loginUsuario);
@@ -125,7 +126,22 @@ class _LoginState extends State<Login> {
                                 builder: (BuildContext context) => Posts()));
                         }
                         else {
-                            log("Erro ao logar");
+                            showDialog(context: context,
+                              builder: (context){
+                                return AlertDialog(
+                                    title:Text("Erro"),
+                                    content: Text("Login e/ou Senha inválido(s)"),
+                                    actions : <Widget>[
+                                      FlatButton(
+                                          child: Text("OK"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          }
+                                      )
+                                    ]
+                                );
+                              },
+                            );
                           }
                         }
                         },
@@ -158,11 +174,9 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Posts()));
-                    },
+                      emailField.text = "";
+                      senhaField.text = "";
+                      },
                     child: Text("Cancelar",
                         style: TextStyle(
                           color: Colors.white,
